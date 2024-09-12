@@ -1,0 +1,39 @@
+# Processing configurations for eye-tracking MT Björn Braun
+
+# Define which probands should be considered
+
+probands_selected: ['201', '202', '203', '205', '207', '208', '209', '211', '212', '213',
+                    '214', '215', '217', '218', '219', '220', '221', '223', '224', '227',
+                    '228', '229', '230', '232', '233', '234', '235', '236', '237', '238',
+                    '239', '240', '241', '242', '243', '244', '245', '247', '249', '250',
+                    '254', '256', '257', '258', '259', '260', '262', '264', '265', '266',
+                    '267', '268', '270', '273']
+
+# Define whether probands should be run in parallel or not (for performance True)
+run_probands_in_parallel: True
+
+raw_input_directory: '/test_track'
+preprocessed_output_directory: '/test_track_processed'
+
+# Define the phases and scenarios to be processed for each proband
+selected_phases: [1, 2, 3]                               # can be any of [1, 2, 3, 4]
+selected_scenarios: ['highway', 'rural', 'city']            # can be any of ['highway', 'rural', 'city']
+
+# Define the distance in mm to the z-plane where the intersection with the gaze vector is calculated
+z_planes: [622, 1122]                                       # should be any of [622, 1122]
+
+# Defines the minimum confidence for samnples to be preprocessed (others will be dropped)
+confidence: 0.01
+
+# Input arguments for the REMODNAV eye movement algorithm
+remodnav_args: ['remodnav/remodnav/remodnav.py',
+                '../../Data/figures/eye_movement/proband_', # output folder for the visualization
+                '1',                                        # only needed if input is in px
+                '50',                                       # framerate of input data
+                'deg',                                      # set to "px" if the input coordinates are in x,y pixels
+                'False',                                    # set to True to visualize the events
+                '--savgol-length', '0.1',                   # to get the minimum window length of 5 (multiplied by framerate)
+                '--median-filter-length', '0.06',           # to get a median filter length of 3 (multiplied by framerate)
+                '--velthresh-startvelocity', '1000',
+                '--pursuit-velthresh', '15']                # threshold for the classification of smooth pursuits/ fixations
+

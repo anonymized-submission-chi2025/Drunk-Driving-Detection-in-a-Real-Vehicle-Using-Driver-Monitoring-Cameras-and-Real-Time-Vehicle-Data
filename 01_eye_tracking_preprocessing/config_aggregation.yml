@@ -1,0 +1,75 @@
+# Processing configurations for eye-tracking
+
+# Define which probands should be considered
+probands_selected: ['201', '202', '203', '205', '207', '208', '209', '211', '212', '213',
+                    '214', '215', '217', '218', '219', '220', '221', '223', '224', '227',
+                    '228', '229', '230', '232', '233', '234', '235', '236', '237', '238',
+                    '239', '240', '241', '242', '243', '244', '245', '247', '249', '250',
+                    '254', '256', '257', '258', '259', '260', '262', '264', '265', '266',
+                    '267', '268', '270', '273']
+
+
+data_directory: '/test_track'
+data_directory_processed: '/test_track_processed'
+
+# Define if parallel processing should be activated
+# Note: Even if False, each patient is processed using multiple cores.
+# I.e., there is parellelization within one patient, but not between patients.
+# In most cases, multi_cores: False is faster here, as the time for one probands is slower (as more cores are available for that probands).
+multi_cores: False
+enforce_recalculation: True
+# Define the epoch widths in seconds for which the aggregation should be done
+aggregation_sizes: [60]
+
+# Define the step size of the sliding window in seconds
+step_size: 1
+
+# Define the phases of the data that should be used for the aggregation
+selected_phases: [1, 2, 3]
+
+# Define the scenarios of the data that should be used for the aggregation
+selected_scenarios: ['highway', 'rural', 'city']  # can be any of ['highway', 'rural', 'city']
+
+# Specify the intended framerate that was used to record the data
+framerate: 50
+
+# Define which features should be used for the aggregation
+  
+numerical_features: ['eye+left_eye_opening_percent+', 'eye+right_eye_opening_percent+',
+'head+mideye_origin_x+pose', 'head+mideye_origin_y+pose', 'head+mideye_origin_z+pose',
+'head+roll+pose', 'head+pitch+pose', 'head+yaw+pose',
+'head+roll+velocity', 'head+pitch+velocity', 'head+yaw+velocity',
+'head+head+velocity', 'head+mideye_origin+velocity',
+'head+mideye_origin_x+velocity', 'head+mideye_origin_y+velocity',
+'head+mideye_origin_z+velocity',
+'head+roll+acceleration', 'head+pitch+acceleration', 'head+yaw+acceleration',
+'head+head+acceleration', 'head+mideye_origin+acceleration',
+'head+mideye_origin_x+acceleration', 'head+mideye_origin_y+acceleration',
+'head+mideye_origin_z+acceleration',
+'head+roll+jerk', 'head+pitch+jerk', 'head+yaw+jerk',
+'head+head+jerk', 'head+mideye_origin+jerk',
+'head+mideye_origin_x+jerk', 'head+mideye_origin_y+jerk',
+'head+mideye_origin_z+jerk',
+'head+roll+snap', 'head+pitch+snap', 'head+yaw+snap',
+'head+head+snap', 'head+mideye_origin+snap',
+'head+mideye_origin_x+snap', 'head+mideye_origin_y+snap',
+'head+mideye_origin_z+snap',
+'gaze+azimuth+pose', 'gaze+elevation+pose',
+'gaze+angle_change+velocity', 'gaze+angle_change_azimuth+velocity', 'gaze+angle_change_elevation+velocity',
+'gaze+direction+velocity', 'gaze+gaze+velocity', 'gaze+azimuth+velocity', 'gaze+elevation+velocity',
+'gaze+gaze+acceleration', 'gaze+_r+acceleration', 'gaze+azimuth+acceleration', 'gaze+elevation+acceleration',
+'gaze+azimuth_elevation+acceleration', 'gaze+gaze+jerk', 'gaze+r+jerk', 'gaze+azimuth+jerk', 'gaze+elevation+jerk',
+'gaze+azimuth_elevation+jerk', 'gaze+gaze+snap', 'gaze+r+snap', 'gaze+azimuth+snap', 'gaze+elevation+snap',
+'gaze+azimuth_elevation+snap', 'misc+drowsinessTime_ms+', 'misc+inattentionTime_ms+',
+'misc+accumulatedInattentionTime_ms+']
+
+binary_features: ['eye+right_eye_state+', 'eye+left_eye_state+', 'aoi+no_gaze_available+',
+'aoi+driver_side_windscreen+', 'aoi+copilot_side_windscreen+', 'aoi+left_rear_mirror+',
+'aoi+right_rear_mirror+', 'aoi+left_window+', 'aoi+right_window+', 'aoi+central_rear_mirror+',
+'aoi+driver_instruments+', 'aoi+navigation_display+', 'aoi+middle_instrument_cluster+',
+'aoi+no_target_zone_detected+', 'misc+inattention+', 'misc+drowsiness+', 'misc+accumulatedInattention+',
+'event+FIXA+onehot', 'event+HPSO+onehot', 'event+IHPS+onehot', 'event+ILPS+onehot', 'event+ISAC+onehot',
+'event+LPSO+onehot', 'event+MISSING+onehot', 'event+PURS+onehot', 'event+SACC+onehot']
+
+single_eye_movement_features: [  'event+FIXA+onehot', 'event+HPSO+onehot', 'event+IHPS+onehot', 'event+ILPS+onehot', 'event+ISAC+onehot',
+                                 'event+LPSO+onehot', 'event+MISSING+onehot', 'event+PURS+onehot', 'event+SACC+onehot']
